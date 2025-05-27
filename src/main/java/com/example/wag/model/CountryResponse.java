@@ -3,27 +3,34 @@ package com.example.wag.model;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true) // Important: ignores any fields not defined in this POJO
 public class CountryResponse {
-	//@JsonProperty("")
-	//private String countryCode;
-	@JsonProperty("name")
-    private String name;
-  /*  private String capital;
+
+    private String cca2;
+    private Name name;
+    private List<String> capital;
     private String region;
-    private List<String> currencies;
-    private List<String> languages;
+    private Map<String, Currency> currencies; // Map of currency code to Currency object
+    private Map<String, String> languages;    // Map of language code to language name
     private List<String> borders;
-    private long population;
-    //private String sizeCategory;*/
+    private Long population;
+
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Name {
+        private String common;
+        private String official;
+    }
+
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Currency {
+        private String name;
+        private String symbol;
+    }
 }
-
-

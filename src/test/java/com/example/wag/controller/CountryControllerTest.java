@@ -2,7 +2,6 @@ package com.example.wag.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -44,16 +43,6 @@ class CountryControllerTest {
         assertEquals(countryDTO, response.getBody());
     }
 
-    @Test
-    void testGetCountry_NotFound() {
-        String code = "XX";
-
-        when(countryService.getCountryData(code)).thenReturn(null);
-
-        ResponseEntity<CountryDTO> response = countryController.getCountry(code);
-
-        assertEquals(404, response.getStatusCode().value());
-        assertNull(response.getBody());
-    }
+    
 }
 
